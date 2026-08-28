@@ -56,3 +56,6 @@ class Products(Base):
     is_active: Mapped[bool] = mapped_column(
         TINYINT(1), nullable=False, server_default=text("1")
     )
+
+    def __repr__(self):
+        return f"<Products(id={self.id}, name={self.name}"
