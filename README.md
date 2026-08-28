@@ -291,7 +291,7 @@ OPENAI_API_KEY=your-api-key
 ### 4. Start the Development Server
 
 ``` bash
-uvicorn app.main:app --reload
+uvicorn main:app --reload
 ```
 
 FastAPI Swagger documentation is available at `/docs`, and ReDoc at
