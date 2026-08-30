@@ -307,7 +307,7 @@ FastAPI Swagger documentation is available at `/docs`, and ReDoc at
 -   [x] MySQL database connection
 -   [x] SQLAlchemy configuration
 -   [x] Product model
--   [ ] Product CRUD API
+-   [x] Product CRUD API
 -   [ ] Product validation
 
 ### Phase 2 --- Authentication
