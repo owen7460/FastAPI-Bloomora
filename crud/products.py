@@ -36,3 +36,16 @@ async def update_product(db: AsyncSession, product_id: int, product: ProductUpda
     await db.refresh(product_obj)
 
     return product_obj
+
+async def delete_product(db: AsyncSession, product_id: int):
+    stmt = select(Products).where(Products.id == product_id)
+    result = await db.execute(stmt)
+    product_obj = result.scalar_one_or_none()
+
+    if product_obj is None:
+        return None
+
+    await db.delete(product_obj)
+    await db.flush()
+
+    return product_obj

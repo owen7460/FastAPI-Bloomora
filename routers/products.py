@@ -46,3 +46,22 @@ async def update_product(
         "message": "update product successfully",
         "data": updated_product,
     }
+
+@router.delete("/{product_id}")
+async def delete_product(
+        product_id: int,
+        db: AsyncSession = Depends(get_db)
+):
+    deleted_product = await products.delete_product(db, product_id)
+
+    if deleted_product is None:
+        raise  HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Product not found"
+        )
+
+    return {
+        "code": 200,
+        "message": "delete product successfully",
+        "data": deleted_product
+    }
