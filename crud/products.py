@@ -5,6 +5,12 @@ from models.products import Products
 from schemas.products import ProductCreate, ProductUpdate
 
 
+async def get_product_by_sku(db: AsyncSession, sku: str):
+    stmt = select(Products).where(Products.sku == sku)
+    result = await db.execute(stmt)
+    return result.scalar_one_or_none()
+
+
 async def get_products(db: AsyncSession, skip: int = 0, limit: int = 10):
     stmt = select(Products).offset(skip).limit(limit)
     result = await db.execute(stmt)
@@ -36,6 +42,7 @@ async def update_product(db: AsyncSession, product_id: int, product: ProductUpda
     await db.refresh(product_obj)
 
     return product_obj
+
 
 async def delete_product(db: AsyncSession, product_id: int):
     stmt = select(Products).where(Products.id == product_id)
