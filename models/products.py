@@ -1,22 +1,10 @@
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import DateTime, Numeric, String, Text, text
+from sqlalchemy import Numeric, String, Text, text
 from sqlalchemy.dialects.mysql import BIGINT, INTEGER, TINYINT
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
-
-class Base(DeclarativeBase):
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime, server_default=text("CURRENT_TIMESTAMP"), comment="create_time"
-    )
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        server_default=text("CURRENT_TIMESTAMP"),
-        server_onupdate=text("CURRENT_TIMESTAMP"),
-        comment="update_time",
-    )
-
+from sqlalchemy.orm import Mapped, mapped_column
+from models.base import Base
 
 class Products(Base):
     __tablename__ = "products"
