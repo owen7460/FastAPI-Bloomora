@@ -6,7 +6,7 @@ from sqlalchemy.dialects.mysql import BIGINT, INTEGER, TINYINT
 from sqlalchemy.orm import Mapped, mapped_column
 from models.base import Base
 
-class Products(Base):
+class Product(Base):
     __tablename__ = "products"
 
     id: Mapped[int] = mapped_column(
@@ -46,4 +46,4 @@ class Products(Base):
     )
 
     def __repr__(self):
-        return f"<Products(id={self.id}, name={self.name}"
+        return f"<Product(id={self.id}, name={self.name}"
