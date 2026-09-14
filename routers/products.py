@@ -7,6 +7,9 @@ from schemas.products import ProductCreate, ProductUpdate
 from services import products as product_service
 from services.products import DuplicateSKUError
 
+from models.users import User
+from dependencies.auth import get_current_user
+
 router = APIRouter(prefix="/api/products", tags=["products"])
 
 
@@ -23,7 +26,11 @@ async def get_products(
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def post_product(product: ProductCreate, db: AsyncSession = Depends(get_db)):
+async def post_product(
+        product: ProductCreate,
+        db: AsyncSession = Depends(get_db),
+        current_user: User = Depends(get_current_user)
+):
     try:
         product_data = await product_service.create_product(db, product)
     except DuplicateSKUError as e:
@@ -38,7 +45,10 @@ async def post_product(product: ProductCreate, db: AsyncSession = Depends(get_db
 
 @router.patch("/{product_id}")
 async def update_product(
-    product_id: int, product: ProductUpdate, db: AsyncSession = Depends(get_db)
+    product_id: int,
+    product: ProductUpdate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     updated_product = await products.update_product(db, product_id, product)
 
@@ -55,7 +65,9 @@ async def update_product(
 
 
 @router.delete("/{product_id}")
-async def delete_product(product_id: int, db: AsyncSession = Depends(get_db)):
+async def delete_product(product_id: int,
+                         db: AsyncSession = Depends(get_db),
+                         current_user: User = Depends(get_current_user)):
     deleted_product = await products.delete_product(db, product_id)
 
     if deleted_product is None:
