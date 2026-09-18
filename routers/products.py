@@ -16,7 +16,7 @@ router = APIRouter(prefix="/api/products", tags=["products"])
 @router.get("/")
 async def get_products(
     skip: int = 0,
-    limit: int = 20,
+    limit: int = 25,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
