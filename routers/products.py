@@ -15,7 +15,10 @@ router = APIRouter(prefix="/api/products", tags=["products"])
 
 @router.get("/")
 async def get_products(
-    skip: int = 0, limit: int = 20, db: AsyncSession = Depends(get_db)
+    skip: int = 0,
+    limit: int = 20,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     products_data = await products.get_products(db, skip, limit)
     return {
@@ -27,9 +30,9 @@ async def get_products(
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def post_product(
-        product: ProductCreate,
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    product: ProductCreate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     try:
         product_data = await product_service.create_product(db, product)
@@ -48,7 +51,7 @@ async def update_product(
     product_id: int,
     product: ProductUpdate,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     updated_product = await products.update_product(db, product_id, product)
 
@@ -65,9 +68,11 @@ async def update_product(
 
 
 @router.delete("/{product_id}")
-async def delete_product(product_id: int,
-                         db: AsyncSession = Depends(get_db),
-                         current_user: User = Depends(get_current_user)):
+async def delete_product(
+    product_id: int,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     deleted_product = await products.delete_product(db, product_id)
 
     if deleted_product is None:
