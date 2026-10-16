@@ -1,8 +1,7 @@
-from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import Numeric, String, Text, text
-from sqlalchemy.dialects.mysql import BIGINT, INTEGER, TINYINT
+from sqlalchemy import Numeric, String, Text, text, Boolean
+from sqlalchemy.dialects.mysql import BIGINT, INTEGER
 from sqlalchemy.orm import Mapped, mapped_column
 from models.base import Base
 
@@ -43,7 +42,7 @@ class Product(Base):
     image_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     is_active: Mapped[bool] = mapped_column(
-        TINYINT(1), nullable=False, server_default=text("1")
+        Boolean, nullable=False, server_default=text("1")
     )
 
     def __repr__(self):

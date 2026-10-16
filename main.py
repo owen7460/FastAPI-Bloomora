@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import products, auth
+from routers import products, auth, announcements
 
 app = FastAPI()
 
@@ -25,3 +25,4 @@ async def root():
 
 app.include_router(products.router)
 app.include_router(auth.router)
+app.include_router(announcements.router)

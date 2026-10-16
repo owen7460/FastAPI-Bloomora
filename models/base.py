@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import DateTime, text
+from sqlalchemy import DateTime, text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -10,6 +10,6 @@ class Base(DeclarativeBase):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
         server_default=text("CURRENT_TIMESTAMP"),
-        server_onupdate=text("CURRENT_TIMESTAMP"),
+        onupdate=func.now(),
         comment="update_time",
     )

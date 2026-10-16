@@ -17,3 +17,6 @@ class User(Base):
     )
 
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
+
+    def __repr__(self):
+        return f"<User {self.id} - {self.email}>"
