@@ -15,11 +15,13 @@ router = APIRouter(prefix="/api/products", tags=["products"])
 
 @router.get("/")
 async def get_products(
-    skip: int = 0,
-    limit: int = 25,
+    page: int = 1,
+    pageSize: int = 25,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    skip = (page - 1) * pageSize
+    limit = pageSize
     products_data = await products.get_products(db, skip, limit)
     return {
         "code": 200,
