@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from config.db_conf import get_db
@@ -16,12 +16,12 @@ router = APIRouter(prefix="/api/products", tags=["products"])
 @router.get("/")
 async def get_products(
     page: int = 1,
-    pageSize: int = 25,
+    page_size: int = Query(25, alias="pageSize"),
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    skip = (page - 1) * pageSize
-    limit = pageSize
+    skip = (page - 1) * page_size
+    limit = page_size
     products_data = await products.get_products(db, skip, limit)
     return {
         "code": 200,
