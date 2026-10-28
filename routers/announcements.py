@@ -72,7 +72,7 @@ async def update_announcement(
         announcement,
     )
 
-    if update_announcement is None:
+    if updated_announcement is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found")
 
     return {
