@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from models.base import Base
 
-class Suppliers(Base):
+class Supplier(Base):
 
     __tablename__ = "suppliers"
 
