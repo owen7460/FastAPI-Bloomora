@@ -4,12 +4,15 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from models.base import Base
 
-class Supplier(Base):
 
+class Supplier(Base):
     __tablename__ = "suppliers"
 
-    id : Mapped[int] = mapped_column(
-        BIGINT(unsigned=True), primary_key=True, autoincrement=True, comment="supplierID"
+    id: Mapped[int] = mapped_column(
+        BIGINT(unsigned=True),
+        primary_key=True,
+        autoincrement=True,
+        comment="supplierID",
     )
 
     name: Mapped[str] = mapped_column(String(150), nullable=False)

@@ -16,10 +16,7 @@ from config.db_conf import ASYNC_DATABASE_URL
 if not ASYNC_DATABASE_URL:
     raise RuntimeError("ASYNC_DATABASE_URL is not configured")
 
-config.set_main_option(
-    "sqlalchemy.url",
-    ASYNC_DATABASE_URL.replace("%", "%%")
-)
+config.set_main_option("sqlalchemy.url", ASYNC_DATABASE_URL.replace("%", "%%"))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

@@ -29,7 +29,7 @@ async def get_current_user(
 
         user_id = int(user_id)
 
-    except (ValueError, jwt.InvalidTokenError):
+    except ValueError, jwt.InvalidTokenError:
         raise credentials_exception
 
     user = await get_user_by_id(db, user_id)

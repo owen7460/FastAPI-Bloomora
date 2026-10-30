@@ -11,6 +11,10 @@ async def get_product_by_sku(db: AsyncSession, sku: str):
     return result.scalar_one_or_none()
 
 
+async def get_product_by_id(db: AsyncSession, product_id: int) -> Product | None:
+    return await db.get(Product, product_id)
+
+
 async def get_products(db: AsyncSession, skip: int = 0, limit: int = 20):
     stmt = select(Product).offset(skip).limit(limit)
     result = await db.execute(stmt)

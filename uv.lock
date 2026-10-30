@@ -267,6 +267,11 @@ dependencies = [
     { name = "zope-interface" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "ruff" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "aiomysql", specifier = "==0.3.2" },
@@ -300,6 +305,9 @@ requires-dist = [
     { name = "uvicorn", specifier = "==0.52.4" },
     { name = "zope-interface", specifier = "==8.6" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.16.5" }]
 
 [[package]]
 name = "greenlet"

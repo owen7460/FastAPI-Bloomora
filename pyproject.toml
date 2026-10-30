@@ -34,3 +34,8 @@ dependencies = [
     "uvicorn==0.52.4",
     "zope-interface==8.6",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.5",
+]

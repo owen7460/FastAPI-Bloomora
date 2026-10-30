@@ -1,5 +1,3 @@
-
-
 from pydantic import BaseModel, Field, EmailStr, ConfigDict, field_validator
 
 
@@ -24,11 +22,7 @@ class SupplierUpdate(BaseModel):
     is_active: bool | None = None
     note: str | None = Field(default=None, min_length=1, max_length=255)
 
-    @field_validator(
-        "name",
-        "is_active"
-)
-
+    @field_validator("name", "is_active")
     @classmethod
     def prevent_null(cls, value):
         if value is None:

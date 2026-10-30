@@ -15,56 +15,63 @@ router = APIRouter(
     tags=["announcements"],
 )
 
+
 @router.get("/{announcement_id}")
 async def get_announcement_by_id(
-        announcement_id: int,
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    announcement_id: int,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     announcement_data = await announcements.get_announcement_by_id(db, announcement_id)
 
     if announcement_data is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found"
+        )
 
     return {
         "code": 200,
         "message": "get announcement successfully",
-        "data": announcement_data
+        "data": announcement_data,
     }
+
 
 @router.get("/")
 async def get_announcements(
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)
 ):
     announcement_data = await announcements.get_announcements(db)
 
     return {
         "code": 200,
         "message": "get announcements successfully",
-        "data": announcement_data
+        "data": announcement_data,
     }
+
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_announcement(
-        announcement: AnnouncementCreate,
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    announcement: AnnouncementCreate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
-    announcement_data = await announcements.create_announcement(db, announcement, created_by=current_user.id)
+    announcement_data = await announcements.create_announcement(
+        db, announcement, created_by=current_user.id
+    )
 
     return {
         "code": 201,
         "message": "create announcement successfully",
-        "data": announcement_data
+        "data": announcement_data,
     }
+
 
 @router.patch("/{announcement_id}")
 async def update_announcement(
-        announcement_id: int,
-        announcement: AnnouncementUpdate,
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    announcement_id: int,
+    announcement: AnnouncementUpdate,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     updated_announcement = await announcements.update_announcement(
         db,
@@ -73,27 +80,32 @@ async def update_announcement(
     )
 
     if updated_announcement is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found"
+        )
 
     return {
         "code": 200,
         "message": "update announcement successfully",
-        "data": updated_announcement
+        "data": updated_announcement,
     }
+
 
 @router.delete("/{announcement_id}")
 async def delete_announcement(
-        announcement_id: int,
-        db: AsyncSession = Depends(get_db),
-        current_user: User = Depends(get_current_user)
+    announcement_id: int,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     deleted_announcement = await announcements.delete_announcement(db, announcement_id)
 
     if deleted_announcement is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Announcement not found"
+        )
 
     return {
         "code": 200,
         "message": "delete announcement successfully",
-        "data": deleted_announcement
+        "data": deleted_announcement,
     }

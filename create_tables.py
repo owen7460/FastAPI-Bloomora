@@ -7,6 +7,7 @@ from models.users import User
 from models.products import Product
 from models.announcements import Announcement
 
+
 async def create_tables():
     try:
         async with async_engine.begin() as conn:

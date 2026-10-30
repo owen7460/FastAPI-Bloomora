@@ -4,6 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from models.base import Base
 
+
 class Announcement(Base):
     __tablename__ = "announcements"
 
@@ -27,15 +28,11 @@ class Announcement(Base):
     )
 
     is_published: Mapped[bool] = mapped_column(
-        Boolean,
-        nullable=False,
-        server_default=text("0")
+        Boolean, nullable=False, server_default=text("0")
     )
 
     is_pinned: Mapped[bool] = mapped_column(
-        Boolean,
-        nullable=False,
-        server_default=text("0")
+        Boolean, nullable=False, server_default=text("0")
     )
 
     created_by: Mapped[int] = mapped_column(
