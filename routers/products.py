@@ -49,7 +49,7 @@ async def get_products(
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def post_product(
+async def create_product(
     product: ProductCreate,
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),

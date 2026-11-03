@@ -24,7 +24,7 @@ class Supplier(Base):
     contact_name: Mapped[str | None] = mapped_column(String(150), nullable=True)
 
     is_active: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, server_default=text("1")
+        Boolean, nullable=False, default=False, server_default=text("1"),
     )
 
     note: Mapped[str | None] = mapped_column(String(255), nullable=True)
