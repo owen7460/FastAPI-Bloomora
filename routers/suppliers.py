@@ -52,12 +52,12 @@ async def create_supplier(
         db: AsyncSession = Depends(get_db),
         current_user: User = Depends(get_current_user)
 ):
-    supplier_data = await suppliers.create_supplier(db, supplier)
+    created_supplier = await suppliers.create_supplier(db, supplier)
 
     return {
         "code": 201,
         "message": "create supplier successfully",
-        "data": supplier_data
+        "data": created_supplier
     }
 
 

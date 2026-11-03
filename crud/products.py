@@ -30,9 +30,7 @@ async def create_product(db: AsyncSession, product: ProductCreate):
 
 
 async def update_product(db: AsyncSession, product_id: int, product: ProductUpdate):
-    stmt = select(Product).where(Product.id == product_id)
-    result = await db.execute(stmt)
-    product_obj = result.scalar_one_or_none()
+    product_obj = await get_product_by_id(db, product_id)
 
     if product_obj is None:
         return None

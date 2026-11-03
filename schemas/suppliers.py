@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, EmailStr, ConfigDict, field_validator
 class SupplierCreate(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
-    name: str = Field(min_length=1, max_length=150, strict=True)
+    name: str = Field(min_length=1, max_length=150)
     email: EmailStr | None = None
     phone: str | None = Field(default=None, min_length=1, max_length=30)
     contact_name: str | None = Field(default=None, min_length=1, max_length=150)

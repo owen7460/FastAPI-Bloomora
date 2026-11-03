@@ -35,7 +35,9 @@ async def create_announcement(
 
 
 async def update_announcement(
-    db: AsyncSession, announcement_id: int, announcement: AnnouncementUpdate
+    db: AsyncSession,
+    announcement_id: int,
+    announcement: AnnouncementUpdate
 ) -> Announcement | None:
     announcement_obj = await get_announcement_by_id(db, announcement_id)
     if announcement_obj is None:
