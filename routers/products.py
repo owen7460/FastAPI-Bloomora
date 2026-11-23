@@ -33,8 +33,8 @@ async def get_product(
 
 @router.get("/")
 async def get_products(
-    page: int = 1,
-    page_size: int = Query(25, alias="pageSize"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(25, ge=1, le=100, alias="pageSize"),
     db: AsyncSession = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):

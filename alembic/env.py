@@ -33,6 +33,7 @@ import models.announcements
 import models.products
 import models.suppliers
 import models.users
+import models.notes
 
 target_metadata = Base.metadata
 
