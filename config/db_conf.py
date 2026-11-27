@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 load_dotenv()
 
-ASYNC_DATABASE_URL = os.getenv("DATABASE_URL")
+ASYNC_DATABASE_URL = os.environ["DATABASE_URL"]
 
 async_engine = create_async_engine(
     ASYNC_DATABASE_URL, echo=True, pool_size=10, max_overflow=20
