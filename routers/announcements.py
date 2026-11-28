@@ -36,7 +36,7 @@ async def get_announcement_by_id(
     }
 
 
-@router.get("/")
+@router.get("")
 async def get_announcements(
     db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)
 ):
