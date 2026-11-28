@@ -13,7 +13,7 @@ from dependencies.auth import get_current_user
 router = APIRouter(prefix="/api/products", tags=["products"])
 
 
-@router.get("/{product_id}", status_code=status.HTTP_200_OK)
+@router.get("/{product_id:int}", status_code=status.HTTP_200_OK)
 async def get_product(
     product_id: int,
     db: AsyncSession = Depends(get_db),
@@ -104,4 +104,17 @@ async def delete_product(
         "code": 200,
         "message": "delete product successfully",
         "data": deleted_product,
+    }
+
+
+@router.get("/total")
+async def get_total_stock_quantity(
+        db: AsyncSession = Depends(get_db),
+        current_user: User = Depends(get_current_user)
+):
+    data = await products.get_total_stock_quantity(db)
+    return{
+        "code": 200,
+        "message": "get total stock quantity successfully",
+        "data": data,
     }

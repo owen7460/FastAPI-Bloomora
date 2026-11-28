@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models.products import Product
@@ -58,3 +58,8 @@ async def delete_product(db: AsyncSession, product_id: int):
     await db.flush()
 
     return product_obj
+
+
+async def get_total_stock_quantity(db: AsyncSession):
+    stmt = select(func.coalesce(func.sum(Product.stock_quantity), 0))
+    return await db.scalar(stmt)
