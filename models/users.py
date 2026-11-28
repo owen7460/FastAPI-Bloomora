@@ -23,7 +23,7 @@ class User(Base):
 
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
 
-    notes: Mapped[list[Note]] = relationship(back_populates="author")
+    notes: Mapped[list["Note"]] = relationship(back_populates="author")
 
     def __repr__(self):
         return f"<User {self.id} - {self.email}>"
